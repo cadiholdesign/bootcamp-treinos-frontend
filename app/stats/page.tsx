@@ -69,6 +69,17 @@ export default async function StatsPage() {
       <div className="flex flex-col gap-6 px-5">
         <StreakBanner workoutStreak={workoutStreak} />
 
+        <div className="flex flex-col gap-4">
+          <h2 className="font-heading text-lg font-semibold text-foreground">
+            Consistência
+          </h2>
+          <ConsistencyHeatmap
+            consistencyByDay={consistencyByDay}
+            from={from}
+            to={to}
+          />
+        </div>
+
         <div className="flex gap-3">
           <StatCard
             icon={Dumbbell}
@@ -84,17 +95,6 @@ export default async function StatsPage() {
             icon={Timer}
             label="Tempo total"
             value={formatDuration(totalTimeInSeconds)}
-          />
-        </div>
-
-        <div className="flex flex-col gap-4">
-          <h2 className="font-heading text-lg font-semibold text-foreground">
-            Consistência
-          </h2>
-          <ConsistencyHeatmap
-            consistencyByDay={consistencyByDay}
-            from={from}
-            to={to}
           />
         </div>
       </div>

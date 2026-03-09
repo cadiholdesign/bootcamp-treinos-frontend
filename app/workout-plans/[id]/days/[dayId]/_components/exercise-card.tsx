@@ -1,5 +1,4 @@
-import { CircleHelp } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ExerciseHelpButton } from "./exercise-help-button";
 
 interface ExerciseCardProps {
   order: number;
@@ -31,9 +30,7 @@ export function ExerciseCard({
           {sets} séries · {reps} reps · {restTimeInSeconds}s descanso
         </span>
       </div>
-      <Button variant="ghost" size="icon" className="shrink-0">
-        <CircleHelp className="size-5 text-muted-foreground" />
-      </Button>
+      <ExerciseHelpButton exerciseName={name} />
     </div>
   );
 }

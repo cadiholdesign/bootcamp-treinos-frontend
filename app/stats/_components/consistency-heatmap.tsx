@@ -78,70 +78,81 @@ export function ConsistencyHeatmap({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex gap-2">
-        <div className="flex w-6 shrink-0 flex-col gap-1 pt-6">
-          {WEEKDAY_SHORT.map((label, i) => (
-            <div
-              key={i}
-              className="flex h-[14px] items-center font-heading text-[10px] text-muted-foreground"
-            >
-              {label}
-            </div>
-          ))}
+      <div className="flex flex-col gap-[3px]">
+        <div className="flex gap-1.5">
+          <div className="w-5 shrink-0" />
+          <div className="grid flex-1 auto-cols-fr grid-flow-col gap-[3px]">
+            {weeks.map((week, weekIdx) => {
+              const isFirstOfMonth =
+                weekIdx === 0 || weeks[weekIdx - 1].month !== week.month;
+              return (
+                <div
+                  key={weekIdx}
+                  className="font-heading text-[10px] text-muted-foreground"
+                >
+                  {isFirstOfMonth ? MONTH_LABELS[week.month] : ""}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="flex flex-1 gap-0.5 overflow-x-auto">
-          {monthGroups.map((group) => (
-            <div key={`${group.month}`} className="flex flex-col gap-1">
-              <span className="h-4 font-heading text-[10px] text-muted-foreground">
-                {MONTH_LABELS[group.month]}
-              </span>
-              <div className="flex gap-0.5">
-                {group.weeks.map((week, weekIdx) => (
-                  <div key={weekIdx} className="flex flex-col gap-0.5">
-                    {week.dates.map((date) => {
-                      const dateStr = date.format("YYYY-MM-DD");
-                      const dayData = consistencyByDay[dateStr];
-                      const isInRange =
-                        (date.isAfter(from) || date.isSame(from, "day")) &&
-                        (date.isBefore(to) || date.isSame(to, "day"));
-
-                      if (!isInRange) {
-                        return (
-                          <div key={dateStr} className="size-[14px]" />
-                        );
-                      }
-
-                      if (dayData?.workoutDayCompleted) {
-                        return (
-                          <div
-                            key={dateStr}
-                            className="size-[14px] rounded-[3px] bg-primary"
-                          />
-                        );
-                      }
-
-                      if (dayData?.workoutDayStarted) {
-                        return (
-                          <div
-                            key={dateStr}
-                            className="size-[14px] rounded-[3px] bg-primary/20"
-                          />
-                        );
-                      }
-
-                      return (
-                        <div
-                          key={dateStr}
-                          className="size-[14px] rounded-[3px] border border-border"
-                        />
-                      );
-                    })}
-                  </div>
-                ))}
+        <div className="flex gap-1.5">
+          <div className="flex w-5 shrink-0 flex-col gap-[3px]">
+            {WEEKDAY_SHORT.map((label, i) => (
+              <div
+                key={i}
+                className="flex flex-1 items-center font-heading text-[10px] text-muted-foreground"
+              >
+                {label}
               </div>
+            ))}
+          </div>
+
+          <div className="grid flex-1 auto-cols-fr grid-flow-col gap-[3px]">
+            {weeks.map((week, weekIdx) => (
+              <div key={weekIdx} className="flex flex-col gap-[3px]">
+                {week.dates.map((date) => {
+                const dateStr = date.format("YYYY-MM-DD");
+                const dayData = consistencyByDay[dateStr];
+                const isInRange =
+                  (date.isAfter(from) || date.isSame(from, "day")) &&
+                  (date.isBefore(to) || date.isSame(to, "day"));
+
+                if (!isInRange) {
+                  return (
+                    <div key={dateStr} className="aspect-square w-full" />
+                  );
+                }
+
+                if (dayData?.workoutDayCompleted) {
+                  return (
+                    <div
+                      key={dateStr}
+                      className="aspect-square w-full rounded-[3px] bg-primary"
+                    />
+                  );
+                }
+
+                if (dayData?.workoutDayStarted) {
+                  return (
+                    <div
+                      key={dateStr}
+                      className="aspect-square w-full rounded-[3px] bg-primary/20"
+                    />
+                  );
+                }
+
+                return (
+                  <div
+                    key={dateStr}
+                    className="aspect-square w-full rounded-[3px] border border-border"
+                  />
+                );
+              })}
             </div>
           ))}
+          </div>
         </div>
       </div>
 

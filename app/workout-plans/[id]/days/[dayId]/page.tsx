@@ -71,7 +71,7 @@ export default async function WorkoutDayPage({ params }: WorkoutDayPageProps) {
   const startSessionWithIds = startSession.bind(null, workoutPlanId, dayId);
   const completeSessionWithIds = activeSession
     ? completeSession.bind(null, workoutPlanId, dayId, activeSession.id)
-    : async () => {};
+    : null;
 
   return (
     <div className="flex min-h-svh flex-col bg-background pb-32">

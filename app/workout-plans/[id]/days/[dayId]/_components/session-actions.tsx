@@ -11,7 +11,7 @@ interface SessionActionsProps {
   activeSessionId: string | null;
   isCompleted: boolean;
   startSessionAction: () => Promise<void>;
-  completeSessionAction: () => Promise<void>;
+  completeSessionAction: (() => Promise<void>) | null;
 }
 
 export function SessionActions({
