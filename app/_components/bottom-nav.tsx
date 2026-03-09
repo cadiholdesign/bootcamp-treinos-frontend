@@ -61,7 +61,7 @@ export function BottomNav({ activePage = "home", calendarHref }: BottomNavProps)
           )}
         />
       </Link>
-      <Button variant="ghost" className="p-3">
+      <Link href="/profile" className="p-3">
         <UserRound
           className={cn(
             "size-6",
@@ -70,7 +70,7 @@ export function BottomNav({ activePage = "home", calendarHref }: BottomNavProps)
               : "text-muted-foreground"
           )}
         />
-      </Button>
+      </Link>
     </nav>
   );
 }
