@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { authClient } from "@/app/_lib/auth-client";
 import { headers } from "next/headers";
 import { getWorkoutPlansWorkoutPlanId } from "@/app/_lib/fetch-generated";
+import { checkOnboarding } from "@/app/_lib/check-onboarding";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -31,6 +32,8 @@ export default async function WorkoutPlanPage({ params }: WorkoutPlanPageProps) 
   });
 
   if (!session.data?.user) redirect("/auth");
+
+  await checkOnboarding();
 
   const { id } = await params;
   const workoutPlan = await getWorkoutPlansWorkoutPlanId(id);

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { authClient } from "@/app/_lib/auth-client";
 import { headers } from "next/headers";
-import { getHomeData } from "@/app/_lib/fetch-generated";
+import { checkOnboarding } from "@/app/_lib/check-onboarding";
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,18 +20,8 @@ export default async function Home() {
 
   if (!session.data?.user) redirect("/auth");
 
+  const homeData = await checkOnboarding();
   const today = dayjs();
-  const homeData = await getHomeData(today.format("YYYY-MM-DD"));
-
-  if (homeData.status !== 200) {
-    return (
-      <div className="flex min-h-svh items-center justify-center">
-        <p className="text-muted-foreground">
-          Erro ao carregar dados. Tente novamente mais tarde.
-        </p>
-      </div>
-    );
-  }
 
   const { todayWorkoutDay, workoutStreak, consistencyByDay } = homeData.data;
 

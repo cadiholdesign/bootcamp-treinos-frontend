@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { authClient } from "@/app/_lib/auth-client";
 import { headers } from "next/headers";
 import { getStats } from "@/app/_lib/fetch-generated";
+import { checkOnboarding } from "@/app/_lib/check-onboarding";
 import dayjs from "dayjs";
 import { Dumbbell, Timer, Target } from "lucide-react";
 import { AppShell } from "@/app/_components/app-shell";
@@ -27,6 +28,8 @@ export default async function StatsPage() {
   });
 
   if (!session.data?.user) redirect("/auth");
+
+  await checkOnboarding();
 
   const today = dayjs();
   const from = today.subtract(2, "month").startOf("month");

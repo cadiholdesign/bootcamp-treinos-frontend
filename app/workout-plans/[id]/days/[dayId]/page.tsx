@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { authClient } from "@/app/_lib/auth-client";
 import { headers } from "next/headers";
 import { getWorkoutPlansWorkoutPlanIdDaysWorkoutDayId } from "@/app/_lib/fetch-generated";
+import { checkOnboarding } from "@/app/_lib/check-onboarding";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Timer, Dumbbell } from "lucide-react";
@@ -34,6 +35,8 @@ export default async function WorkoutDayPage({ params }: WorkoutDayPageProps) {
   });
 
   if (!session.data?.user) redirect("/auth");
+
+  await checkOnboarding();
 
   const { id: workoutPlanId, dayId } = await params;
   const workoutDay = await getWorkoutPlansWorkoutPlanIdDaysWorkoutDayId(
