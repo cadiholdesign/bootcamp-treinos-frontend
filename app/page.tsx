@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { authClient } from "@/app/_lib/auth-client";
 import { headers } from "next/headers";
+import { getHomeData } from "@/app/_lib/fetch-generated";
+import dayjs from "dayjs";
 
 export default async function Home() {
   const session = await authClient.getSession({
