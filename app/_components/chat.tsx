@@ -37,7 +37,7 @@ export function Chat({ embedded = false, initialMessage }: ChatProps) {
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
       api: `${process.env.NEXT_PUBLIC_API_URL}/ai`,
-      credentials: "include",
+      credentials: "include" as RequestCredentials,
     }),
   });
 

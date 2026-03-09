@@ -4,7 +4,7 @@ import { headers } from "next/headers";
 import { getStats } from "@/app/_lib/fetch-generated";
 import dayjs from "dayjs";
 import { Dumbbell, Timer, Target } from "lucide-react";
-import { BottomNav } from "@/app/_components/bottom-nav";
+import { AppShell } from "@/app/_components/app-shell";
 import { StreakBanner } from "./_components/streak-banner";
 import { StatCard } from "./_components/stat-card";
 import { ConsistencyHeatmap } from "./_components/consistency-heatmap";
@@ -96,7 +96,7 @@ export default async function StatsPage() {
         </div>
       </div>
 
-      <BottomNav activePage="stats" />
+      <AppShell activePage="stats" />
     </div>
   );
 }

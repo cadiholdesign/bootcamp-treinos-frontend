@@ -9,7 +9,7 @@ import { Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WorkoutDayCard } from "@/app/_components/workout-day-card";
 import { ConsistencyTracker } from "@/app/_components/consistency-tracker";
-import { BottomNav } from "@/app/_components/bottom-nav";
+import { AppShell } from "@/app/_components/app-shell";
 
 export default async function Home() {
   const session = await authClient.getSession({
@@ -121,7 +121,10 @@ export default async function Home() {
         </div>
       </div>
 
-      <BottomNav activePage="home" />
+      <AppShell
+        activePage="home"
+        calendarHref={`/workout-plans/${homeData.data.activeWorkoutPlanId}`}
+      />
     </div>
   );
 }

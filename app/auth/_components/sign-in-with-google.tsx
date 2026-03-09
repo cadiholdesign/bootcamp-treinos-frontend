@@ -2,29 +2,33 @@
 
 import { authClient } from "@/app/_lib/auth-client";
 import { Button } from "@/components/ui/button";
-import { GoogleIcon } from "./google-icon";
+import Image from "next/image";
 
-export function SignInWithGoogle() {
-  const handleSignIn = async () => {
+export const SignInWithGoogle = () => {
+  const handleGoogleLogin = async () => {
     const { error } = await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
     });
 
     if (error) {
-      console.error("Sign in error:", error);
+      console.error(error.message);
     }
   };
 
   return (
     <Button
-      variant="outline"
-      size="lg"
-      className="w-full gap-3 rounded-xl border-primary-foreground/20 bg-primary-foreground/10 py-6 text-base font-medium text-primary-foreground hover:bg-primary-foreground/20"
-      onClick={handleSignIn}
+      onClick={handleGoogleLogin}
+      className="h-[38px] rounded-full bg-white px-6 text-black hover:bg-white/90"
     >
-      <GoogleIcon />
-      Entrar com o Google
+      <Image
+        src="/google-icon.svg"
+        alt=""
+        width={16}
+        height={16}
+        className="shrink-0"
+      />
+      Fazer login com Google
     </Button>
   );
-}
+};

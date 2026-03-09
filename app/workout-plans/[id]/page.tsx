@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { WorkoutDayCard } from "@/app/_components/workout-day-card";
-import { BottomNav } from "@/app/_components/bottom-nav";
+import { AppShell } from "@/app/_components/app-shell";
 
 const WEEKDAY_ORDER = [
   "MONDAY",
@@ -94,7 +94,7 @@ export default async function WorkoutPlanPage({ params }: WorkoutPlanPageProps) 
         ))}
       </div>
 
-      <BottomNav activePage="calendar" />
+      <AppShell activePage="calendar" calendarHref={`/workout-plans/${id}`} />
     </div>
   );
 }
