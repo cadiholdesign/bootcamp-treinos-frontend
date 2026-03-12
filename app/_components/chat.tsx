@@ -37,7 +37,6 @@ export function Chat({ embedded = false, initialMessage }: ChatProps) {
   const { messages, sendMessage, status } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/ai",
-      maxSteps: 10,
     }),
   });
 
