@@ -4,7 +4,7 @@ import { authClient } from "@/app/_lib/auth-client";
 import { headers } from "next/headers";
 import { SignInWithGoogle } from "./_components/sign-in-with-google";
 
-export default async function AuthPage() {
+export default async function Home() {
   const session = await authClient.getSession({
     fetchOptions: {
       headers: await headers(),
@@ -14,7 +14,7 @@ export default async function AuthPage() {
   if (session.data?.user) redirect("/");
 
   return (
-    <div className="relative flex min-h-svh flex-col bg-foreground">
+    <div className="relative flex min-h-svh flex-col bg-black">
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <Image
           src="/login-bg.png"
