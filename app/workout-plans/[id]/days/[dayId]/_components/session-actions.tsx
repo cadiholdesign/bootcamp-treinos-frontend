@@ -35,7 +35,7 @@ export function SessionActions({
   if (activeSessionId) {
     const handleComplete = async () => {
       setIsLoading(true);
-      await completeSessionAction();
+      await completeSessionAction?.();
       router.refresh();
       setIsLoading(false);
     };
